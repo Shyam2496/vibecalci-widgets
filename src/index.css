@@ -1,0 +1,119 @@
+@import "tailwindcss";
+
+@theme {
+  --color-heading-1: #1e3a5f;
+  --color-heading-2: #1b4332;
+  --color-heading-3: #2d6a4f;
+  --color-default-font: #333333;
+  --color-neutral-border: #e5e5e5;
+  --color-neutral-200: #fafafa;
+  --color-neutral-600: #525252;
+  --color-neutral-700: #404040;
+  --color-neutral-900: #171717;
+  
+  --font-heading-1: 600 24px/32px 'Inter', sans-serif;
+  --font-heading-2: 600 20px/28px 'Inter', sans-serif;
+  --font-heading-3: 600 16px/24px 'Inter', sans-serif;
+  --font-body: 400 14px/20px 'Inter', sans-serif;
+  --font-body-bold: 600 14px/20px 'Inter', sans-serif;
+  --font-caption: 400 12px/16px 'Inter', sans-serif;
+  --font-caption-bold: 600 12px/16px 'Inter', sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-100 text-default-font antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+/* Custom hide scrollbar */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@layer utilities {
+  .brushed-metal {
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 50%, rgba(0, 0, 0, 0.05) 100%);
+  }
+
+  .neumorphic-inset {
+    @apply bg-neutral-100 border-t border-l border-neutral-200/50 border-r border-b border-white transition-all duration-300;
+    box-shadow: inset 3px 3px 6px rgba(0, 0, 0, 0.08), inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+  }
+  
+  .neumorphic-inset:focus-within {
+    box-shadow: inset 3px 3px 7px rgba(0, 0, 0, 0.08), inset -3px -3px 7px rgba(255, 255, 255, 1);
+  }
+
+  .neumorphic-elevated {
+    @apply bg-[#f2f3f6] text-neutral-800 transition-all duration-75;
+    box-shadow: 0 4px 0px 0px rgba(0, 0, 0, 0.1), 0 8px 12px -4px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  }
+  
+  .neumorphic-elevated:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 0px 0px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.8);
+  }
+
+  .neumorphic-slider-track {
+    @apply appearance-none w-full h-1.5 rounded-full transition-all duration-300;
+    box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.06), inset -1.5px -1.5px 3px rgba(255, 255, 255, 0.8);
+  }
+
+  .neumorphic-slider-thumb::-webkit-slider-thumb {
+    @apply appearance-none w-4 h-4 rounded-full border border-white/80 cursor-pointer transition-all duration-200;
+    background: radial-gradient(circle at center, var(--thumb-color) 0%, var(--thumb-color) 35%, #ffffff 35%, #f0f0f0 100%);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 1);
+  }
+
+  .neumorphic-slider-thumb::-webkit-slider-thumb:hover {
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.1), -3px -3px 6px rgba(255, 255, 255, 1);
+    transform: scale(1.1);
+  }
+
+  .neumorphic-slider-thumb::-webkit-slider-thumb:active {
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.05), inset -1px -1px 2px rgba(255, 255, 255, 0.8);
+    transform: scale(0.95);
+  }
+
+  /* Slider Thumb - Firefox */
+  .neumorphic-slider-thumb::-moz-range-thumb {
+    @apply w-4 h-4 rounded-full border border-white/80 cursor-pointer transition-all duration-200;
+    background: radial-gradient(circle at center, var(--thumb-color) 0%, var(--thumb-color) 35%, #ffffff 35%, #f0f0f0 100%);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1), -2px -2px 5px rgba(255, 255, 255, 1);
+  }
+
+  /* Drag & Drop */
+  .draggable-widget {
+    cursor: grab;
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .draggable-widget:active {
+    cursor: grabbing;
+  }
+  .draggable-widget.dragging {
+    opacity: 0.4;
+    transform: scale(0.97);
+  }
+
+  .canvas-drop-zone {
+    transition: background-color 0.2s, border-color 0.2s;
+  }
+  .canvas-drop-zone.drag-over {
+    background-color: rgba(16, 185, 129, 0.05);
+    border-color: rgba(16, 185, 129, 0.4);
+  }
+
+  .canvas-widget-item {
+    animation: canvas-slide-in 0.25s ease-out;
+  }
+  @keyframes canvas-slide-in {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
